@@ -1,0 +1,26 @@
+# rasa-llm-violencia/config.yml
+
+language: es
+# ... (otras configuraciones)
+
+pipeline:
+  # Clasificadores básicos que detectarán (o fallarán) tus intents
+  - name: WhitespaceTokenizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+  - name: DIETClassifier
+    epochs: 100
+    constrain_resources: true
+
+  # ⚠️ CLAVE: Detector de baja confianza
+  - name: FallbackClassifier
+    threshold: 0.75 # Si la confianza es menor a 0.75, predice "nlu_fallback"
+    
+policies:
+  # ... (otras políticas)
+  - name: RulePolicy
+  - name: TEDPolicy
+    epochs: 100
