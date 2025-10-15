@@ -1,0 +1,8 @@
+# rasa-llm-violencia/requirements.txt
+rasa-sdk==3.8.0 
+transformers
+datasets
+sentence-transformers
+faiss-cpu
+numpy
+torch
